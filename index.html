@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			ul{
+				list-style: none;
+				background-image: url(images/bg1.jpg);
+				width: 648px;
+				height: 648px;
+				position: relative;
+			}
+			ul li{
+				width: 142px;
+				height: 142px;
+				position: absolute;
+			}
+			
+			ul #li1{
+				left: 55px;
+				top:50px;
+			}
+			ul #li2{
+				left: 197px;
+				top:50px;
+			}
+			ul #li3{
+				left: 339px;
+				top:50px;
+			}
+			ul #li4{
+				left: 481px;
+				top:50px;
+			}
+			ul #li5{
+				left: 481px;
+				top:192px;
+			}
+			ul #li6{
+				left: 481px;
+				top:334px;
+			}
+			ul #li7{
+				left: 481px;
+				top:476px;
+			}
+			ul #li8{
+				left: 339px;
+				top:476px;
+			}
+			ul #li9{
+				left: 197px;
+				top:476px;
+			}
+			ul #li10{
+				left: 55px;
+				top:476px;
+			}
+			ul #li11{
+				left: 55px;
+				top:334px;
+			}
+			ul #li12{
+				left: 55px;
+				top:192px;
+			}
+			ul #but{
+				width:230px;
+				height:220px;
+				left:220px;
+				top:230px;
+				background-image: url(images/b2g.jpg);
+			}
+		</style>
+
+	</head>
+	<body>
+		<ul id="ul" >
+			<li id="li1"><img src="images/3.png"/></li>
+			<li id="li2"><img src="images/4.png"/></li>
+			<li id="li3"><img src="images/5.png"/></li>
+			<li id="li4"><img src="images/1.png"/></li>
+			<li id="li5"><img src="images/6.png"/></li>
+			<li id="li6"><img src="images/7.png"/></li>
+			<li id="li7"><img src="images/3.png"/></li>
+			<li id="li8"><img src="images/1.png"/></li>
+			<li id="li9"><img src="images/2.png"/></li>
+			<li id="li10"><img src="images/3.png"/></li>
+			<li id="li11"><img src="images/3.png"/></li>
+			<li id="li12"><img src="images/8.png"/></li>
+			<li id="but" onclick="ifbegin()"></li>
+
+		</ul>
+	</body>
+	<script>
+		// dom 获取 
+
+		// 点击   
+
+		var i = 0; // 转盘礼品的下标  li的下标 默认为0
+		var lis = document.querySelectorAll('li'); // 最后一个li不是我们想要的  
+		var lipin=["手机","谢谢参与","耐克篮球鞋","耐克篮球鞋","耳机","玩具","手机","谢谢参与","耳机","苹果PAD","谢谢参与","谢谢参与"];
+		var flag = true;
+		var t_num; // 第几个定时器 
+		function ifbegin(){
+			// 切换背景 
+			
+			
+			if(flag){
+				// 动起来  // 切换图片
+				changeto();
+				document.getElementById('but').style.backgroundImage= "url(images/b1g.jpg)"
+
+			}
+			else{
+				// 停下来  // 切换图片 
+				stop()
+			}
+			flag = !flag;
+
+		}
+		// 让动起来的动作持续运行
+		function changeto(){
+			t_num = setInterval(go,30+Math.random()*10)
+		}
+
+		// 动起来 每次的动作 
+		function go(){
+			if(i>=lis.length-1){ // 保证始终在0~11范围内 
+				i = 0;
+			}
+			// 让背景变色之前 清除所有的背景色 
+			// 始终让它的前一个去掉背景色
+			if(i==0){
+				lis[11].style.backgroundColor = "";
+			}else{
+				lis[i-1].style.backgroundColor = "";
+			}
+			// 到谁谁变色 
+			lis[i].style.backgroundColor = '#f00';
+			i++;
+		}
+
+		// 停下来
+
+		function stop(){
+			clearInterval(t_num);
+			document.getElementById('but').style.backgroundImage= "url(images/b2g.jpg)";
+			switch(i){
+				case 1:
+				case 7:
+				case 10:
+				case 11:
+					alert('谢谢参与');
+					break
+				default:
+					alert('恭喜获得礼品'+lipin[i]+'!');
+			}
+		}
+	</script>
+</html>
